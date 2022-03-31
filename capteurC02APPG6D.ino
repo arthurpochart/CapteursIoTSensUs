@@ -1,6 +1,7 @@
 //---------Capteur CO2------------//
 #include "MQ135.h"
 
+
 const int mq135Pin = 0; // Pin sur lequel est branché de MQ135
 
 MQ135 gasSensor = MQ135(mq135Pin); // Initialise l'objet MQ135 sur le Pin spécifié
@@ -11,6 +12,9 @@ int incomingByte = 0;
 //Potentiometre//
 int alagogPin = 18;
 int potVal = 0;
+char dta[20];
+int n;
+
 
 void setup() {
   Serial.begin(9600); // Initialise le port série à 9600 bps 
@@ -21,6 +25,27 @@ void setup() {
   Serial.print("R0: ");
   Serial.println(rzero); // Valeur à reporter ligne 27 du fichier mq135.h après 48h de préchauffage
   motd();
+  
+  dta[0] = '1';
+  dta[1] = '0';
+  dta[2] = '0';
+  dta[3] = '0';
+  dta[4] = '1';
+  dta[5] = '1';
+  dta[6] = '1';
+  dta[7] = '1';
+  dta[8] = '1';
+  dta[9] = '1';
+  dta[10] = '1';
+  dta[11] = '1';
+  dta[12] = '1';
+  dta[13] = '1';
+  dta[14] = '1';
+  dta[15] = '1';
+  dta[16] = '1';
+  
+  
+  
 }
 ///---Fonctions-------//
 void capteurco2() {
@@ -58,13 +83,22 @@ void pot() {
   Serial1.println("Volts:");
   Serial1.println(voltage);
   Serial1.println("---------");
-  delay(1000);
+  delay(5000);
 }
 void loop() {
 
   boolean running = false;
 
   //--------Interface Utulisateur---------//
+  
+  
+
+
+  for (n=0; n<17;n++){
+  Serial1.print("10010");
+  Serial1.print(dta[n], HEX);
+  Serial.println(dta[n]);}
+  delay(5000);
 
   if (Serial.available() > 0) {
     incomingByte = Serial.read();
