@@ -15,6 +15,11 @@ int potVal = 0;
 char dta[20];
 int n;
 
+//Variables de trame//
+String data = "1"+"0001"+"1"+"3"+"01"+"002B"+"0125"+"1B";
+           // TRA  OBJ   REQ TYP  NUM   VAL   TIM    CHK
+
+
 
 void setup() {
   Serial.begin(9600); // Initialise le port série à 9600 bps 
@@ -93,12 +98,9 @@ void loop() {
   
   
 
-
-  for (n=0; n<17;n++){
-  Serial1.print("10010");
-  Serial1.print(dta[n], HEX);
-  Serial.println(dta[n]);}
-  delay(5000);
+  
+  Serial1.print(data);
+  delay(1000);
 
   if (Serial.available() > 0) {
     incomingByte = Serial.read();
